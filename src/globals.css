@@ -1,0 +1,9 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
+.tx {
+  transition: all 200ms linear;
+  transition-property: background, border, box-shadow, color, opacity, outline, transform,
+    visibility;
+}
