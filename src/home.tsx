@@ -1,5 +1,5 @@
 import useLambda from 'hooks'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 interface Props {
   path?: string
