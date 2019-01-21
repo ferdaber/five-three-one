@@ -6,9 +6,9 @@ interface Props {
 }
 
 export function Home(_: Props) {
-  const testLambda = useLambda<{ text: string }>('test-lambda', 'GET')
+  const testLambda = useLambda<{}>('test-lambda', 'GET')
   useEffect(() => {
-    testLambda().then(response => console.log(response.text))
+    testLambda().then(response => console.log(response))
   }, [])
   return <div>Welcome to the app!</div>
 }

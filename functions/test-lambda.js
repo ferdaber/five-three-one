@@ -8,6 +8,7 @@ module.exports = {
       },
       body: JSON.stringify({
         text: process.env.TEST_ENV,
+        ...context.clientContext,
       }),
     })
   },
