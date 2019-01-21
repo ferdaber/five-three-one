@@ -36,7 +36,7 @@ export default function useLambda<TResponse = unknown>(
   body?: any
 ) {
   const user = useIdentityUser()
-  const url = `./netlify/functions/${lambdaName}`
+  const url = `/.netlify/functions/${lambdaName}`
   const headers = {
     Accept: 'application/json',
     Authorization: `Bearer ${user!.token!.access_token}`,
