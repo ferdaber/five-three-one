@@ -1,8 +1,12 @@
-type LambdaResponse = {
+import { Handler, APIGatewayEvent } from 'aws-lambda'
+
+interface LambdaResponse {
   isBase64Encoded: boolean
   statusCode: number
   headers: Record<string, string>
   body: any
 }
 
-type Lambda = import('aws-lambda').Handler<import('aws-lambda').APIGatewayEvent, LambdaResponse>
+declare global {
+  interface Lambda extends Handler<APIGatewayEvent, LambdaResponse> {}
+}
