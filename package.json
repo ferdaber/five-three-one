@@ -15,13 +15,15 @@
     "ts:watch": "tsc --watch",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "yarn lint --fix",
-    "checks": "yarn lint:fix && yarn test && yarn ts"
+    "checks": "yarn lint:fix && yarn test && yarn ts",
+    "deploy": "yarn checks && yarn build:prod && netlify deploy --prod --site=build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.6",
     "@reach/router": "^1.2.1",
     "clsx": "^1.0.1",
     "immer": "^1.10.5",
+    "netlify-identity-widget": "^1.5.2",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0"
   },
@@ -35,6 +37,7 @@
     "@babel/preset-typescript": "^7.1.0",
     "@emotion/babel-preset-css-prop": "^10.0.6",
     "@types/jest": "^23.3.12",
+    "@types/netlify-identity-widget": "^1.4.0",
     "@types/reach__router": "^1.2.3",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
@@ -52,6 +55,7 @@
     "html-webpack-plugin": "^4.0.0-beta.5",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.5.0",
+    "netlify-cli": "^2.6.3",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-safe-parser": "^4.0.1",

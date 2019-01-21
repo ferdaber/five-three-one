@@ -1,0 +1,10 @@
+[Settings]
+ID = "74a3a696-a2b0-4d72-8d2f-dff53b1f8d6b"
+
+[build]
+  publish = "build/"
+  command = "npm run checks && npm run build:prod"
+  functions = "functions/"
+
+[build.environment]
+  NODE_ENV = "production"

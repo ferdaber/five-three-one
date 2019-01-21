@@ -1,6 +1,6 @@
 import produce from 'immer'
-import React, { createContext, ReactNode, useReducer, Dispatch, useContext } from 'react'
-import { tuple } from 'util'
+import React, { createContext, Dispatch, ReactNode, useReducer } from 'react'
+import { tuple } from 'utils'
 
 export function createStore<TStore>(initialState: TStore) {
   interface Producer {
@@ -22,7 +22,7 @@ export function createStore<TStore>(initialState: TStore) {
       )
     },
     hook() {
-      return tuple(useContext(State), useContext(Updater))
+      return tuple(React.useContext(State), React.useContext(Updater))
     },
   }
 }
