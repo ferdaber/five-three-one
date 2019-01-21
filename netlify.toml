@@ -5,6 +5,3 @@ ID = "74a3a696-a2b0-4d72-8d2f-dff53b1f8d6b"
   publish = "build/"
   command = "yarn deploy"
   functions = "functions/"
-
-[build.environment]
-  NODE_ENV = "production"

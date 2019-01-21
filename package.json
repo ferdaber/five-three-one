@@ -16,7 +16,7 @@
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "yarn lint --fix",
     "checks": "yarn lint:fix && yarn test && yarn ts",
-    "deploy": "yarn install --frozen-lockfile --production=false && yarn checks && yarn build"
+    "deploy": "NODE_ENV=production && yarn checks && yarn build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.6",
