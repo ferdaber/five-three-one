@@ -7,8 +7,17 @@ interface Props {
 
 export function Home(_: Props) {
   const testLambda = useLambda<{}>('test-lambda', 'GET')
-  useEffect(() => {
-    testLambda().then(response => console.log(response))
-  }, [])
-  return <div>Welcome to the app!</div>
+  return (
+    <div>
+      Welcome to the app!
+      <button
+        onClick={async () => {
+          const response = await testLambda()
+          console.log(response)
+        }}
+      >
+        Debug lambda
+      </button>
+    </div>
+  )
 }
