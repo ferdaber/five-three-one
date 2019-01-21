@@ -1,19 +1,14 @@
-import React, { useRef, useEffect } from 'react'
-import { useIdentityUser } from 'auth'
+import useRequest from 'hooks'
+import React, { useEffect } from 'react'
 
 interface Props {
   path?: string
 }
 
 export function Home(_: Props) {
-  const didReportUser = useRef(false)
-  const user = useIdentityUser()
+  const testLambda = useRequest('/.netlify/functions/test-lambda', 'GET')
   useEffect(() => {
-    if (didReportUser.current) return
-    if (user) {
-      didReportUser.current = true
-      console.log(user)
-    }
-  }, [user])
+    testLambda().then(response => console.log((response as any).text))
+  }, [])
   return <div>Welcome to the app!</div>
 }
