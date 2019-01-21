@@ -30,8 +30,13 @@ export function createStore<TStore>(initialState: TStore) {
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
-export default function useRequest(url: string, method: Method, body?: any) {
+export default function useLambda<TResponse = unknown>(
+  lambdaName: string,
+  method: Method,
+  body?: any
+) {
   const user = useIdentityUser()
+  const url = `./netlify/functions/${lambdaName}`
   const headers = {
     Accept: 'application/json',
     Authorization: `Bearer ${user!.token!.access_token}`,
@@ -44,9 +49,9 @@ export default function useRequest(url: string, method: Method, body?: any) {
     headers['Content-Type'] = 'application/json'
     init.body = JSON.stringify(body)
   }
-  return async function request(): Promise<unknown> {
+  return async function request(): Promise<TResponse> {
     const response = await fetch(url, init)
-    return response.status === 200 && response.headers['Content-Type'] === 'application/json'
+    return response.status === 200 && response.headers.get('Content-Type') === 'application/json'
       ? response.json()
       : response
   }

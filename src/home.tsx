@@ -1,4 +1,4 @@
-import useRequest from 'hooks'
+import useLambda from 'hooks'
 import React, { useEffect } from 'react'
 
 interface Props {
@@ -6,9 +6,9 @@ interface Props {
 }
 
 export function Home(_: Props) {
-  const testLambda = useRequest('/.netlify/functions/test-lambda', 'GET')
+  const testLambda = useLambda<{ text: string }>('test-lambda', 'GET')
   useEffect(() => {
-    testLambda().then(response => console.log((response as any).text))
+    testLambda().then(response => console.log(response.text))
   }, [])
   return <div>Welcome to the app!</div>
 }
