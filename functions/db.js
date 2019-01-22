@@ -1,20 +1,23 @@
-const firebase = require('firebase')
+const firebase = require('firebase-admin')
 
-var config = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_PROJECT_ID + '.firebaseapp.com',
-  databaseURL: 'https://' + process.env.FIREBASE_PROJECT_ID + '.firebaseio.com',
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_PROJECT_ID + '.appspot.com',
-  messagingSenderId: '192610615089',
-}
+let { FIREBASE_PROJECT_ID, FIREBASE_ADMIN_PRIVATE_KEY } = process.env
+FIREBASE_ADMIN_PRIVATE_KEY = FIREBASE_ADMIN_PRIVATE_KEY.replace(/%n/g, '\n')
 
-const app = firebase.initializeApp(config)
+const app = firebase.initializeApp({
+  credential: firebase.credential.cert({
+    clientEmail: `firestore@${FIREBASE_PROJECT_ID}.iam.gserviceaccount.com`,
+    privateKey: `-----BEGIN PRIVATE KEY-----\n${FIREBASE_ADMIN_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`,
+    projectId: FIREBASE_PROJECT_ID,
+  }),
+  databaseURL: `https://${FIREBASE_PROJECT_ID}.firebaseio.com`,
+})
+
 const db = app.firestore()
 
 module.exports = {
   /** @type {Lambda} */
   async handler(event, context) {
+    console.log({ FIREBASE_PROJECT_ID, FIREBASE_ADMIN_PRIVATE_KEY })
     const posts = await db.collection('posts').get()
     return {
       statusCode: 200,
