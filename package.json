@@ -9,6 +9,7 @@
     "build": "webpack",
     "build:dev": "NODE_ENV=development webpack",
     "build:prod": "NODE_ENV=production webpack",
+    "build:functions": "NODE_ENV=production netlify-lambda build functions",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "ts": "tsc",
@@ -16,7 +17,7 @@
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "yarn lint --fix",
     "checks": "yarn lint:fix && yarn test && yarn ts",
-    "deploy": "NODE_ENV=production && yarn checks && yarn build"
+    "deploy": "NODE_ENV=production && yarn checks && yarn build && yarn build:functions"
   },
   "dependencies": {
     "@emotion/core": "^10.0.6",
@@ -58,6 +59,7 @@
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.5.0",
     "netlify-cli": "^2.6.3",
+    "netlify-lambda": "^1.3.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-safe-parser": "^4.0.1",
