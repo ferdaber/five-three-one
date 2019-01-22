@@ -6,13 +6,13 @@ interface Props {
 }
 
 export function Home(_: Props) {
-  const testLambda = useLambda<{}>('test-lambda', 'GET')
+  const firebasedb = useLambda<any[]>('firebasedb', 'GET')
   return (
     <div>
       Welcome to the app!
       <button
         onClick={async () => {
-          const response = await testLambda()
+          const response = await firebasedb()
           console.log(response)
         }}
       >
