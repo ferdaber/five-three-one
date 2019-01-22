@@ -3,6 +3,8 @@ const firebase = require('firebase-admin')
 let { FIREBASE_PROJECT_ID, FIREBASE_ADMIN_PRIVATE_KEY } = process.env
 FIREBASE_ADMIN_PRIVATE_KEY = FIREBASE_ADMIN_PRIVATE_KEY.replace(/%n/g, '\n')
 
+console.log({ FIREBASE_PROJECT_ID, FIREBASE_ADMIN_PRIVATE_KEY })
+
 const app = firebase.initializeApp({
   credential: firebase.credential.cert({
     clientEmail: `firestore@${FIREBASE_PROJECT_ID}.iam.gserviceaccount.com`,
@@ -17,7 +19,6 @@ const db = app.firestore()
 module.exports = {
   /** @type {Lambda} */
   async handler(event, context) {
-    console.log({ FIREBASE_PROJECT_ID, FIREBASE_ADMIN_PRIVATE_KEY })
     const posts = await db.collection('posts').get()
     return {
       statusCode: 200,
